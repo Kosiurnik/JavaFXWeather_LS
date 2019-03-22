@@ -1,5 +1,6 @@
 package sda.lukaszs.weatherfx.Controller;
 
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import sda.lukaszs.weatherfx.Service.WeatherService;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.Normalizer;
 import java.util.ResourceBundle;
 
 public class WeatherFXController implements Initializable {
@@ -49,7 +51,9 @@ public class WeatherFXController implements Initializable {
 
 
     public void setCity() {
-        fillLabels(WeatherService.getInstance().getWeatherAt(fxTextFieldCity.getText()));
+        String cityNormalized = Normalizer.normalize(fxTextFieldCity.getText(), Normalizer.Form.NFD);
+        String city = cityNormalized.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        fillLabels(WeatherService.getInstance().getWeatherAt(city));
     }
 
     @Override
