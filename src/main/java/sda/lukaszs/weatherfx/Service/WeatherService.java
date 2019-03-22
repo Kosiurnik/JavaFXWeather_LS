@@ -5,6 +5,7 @@ import sda.lukaszs.weatherfx.Model.Weather;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class WeatherService {
     private final String apiURL = "http://api.apixu.com/v1/current.json?key=9889be10aad4447183a115547191003&lang=pl&q=";
@@ -19,7 +20,7 @@ public class WeatherService {
         Weather weather = null;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            URL url = new URL(apiURL + cityName);
+            URL url = new URL(apiURL + URLEncoder.encode(cityName,"UTF-8"));
             weather = mapper.readValue(url, Weather.class);
 
         } catch (IOException e) {

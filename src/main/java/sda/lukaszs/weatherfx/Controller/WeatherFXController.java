@@ -51,9 +51,7 @@ public class WeatherFXController implements Initializable {
 
 
     public void setCity() {
-        String cityNormalized = Normalizer.normalize(fxTextFieldCity.getText(), Normalizer.Form.NFD);
-        String city = cityNormalized.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
-        fillLabels(WeatherService.getInstance().getWeatherAt(city));
+        fillLabels(WeatherService.getInstance().getWeatherAt(fxTextFieldCity.getText()));
     }
 
     @Override
