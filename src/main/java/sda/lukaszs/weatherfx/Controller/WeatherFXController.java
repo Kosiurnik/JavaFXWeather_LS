@@ -9,11 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sda.lukaszs.weatherfx.Model.Weather;
+import sda.lukaszs.weatherfx.MyStringUtils;
 import sda.lukaszs.weatherfx.Service.WeatherService;
 
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.Normalizer;
 import java.util.ResourceBundle;
 
 public class WeatherFXController implements Initializable {
@@ -51,7 +50,8 @@ public class WeatherFXController implements Initializable {
 
 
     public void setCity() {
-        fillLabels(WeatherService.getInstance().getWeatherAt(fxTextFieldCity.getText()));
+        String city = MyStringUtils.stripAccents(fxTextFieldCity.getText());
+        fillLabels(WeatherService.getInstance().getWeatherAt(city));
     }
 
     @Override
@@ -88,7 +88,7 @@ public class WeatherFXController implements Initializable {
         fxCurrentPressure.setText(String.format("%d hPa", weather.getCurrent().getPressureMB()));
         fxCurrentHumidity.setText(String.format("%d%%", weather.getCurrent().getHumidity()));
         fxCurrentCloud.setText(String.format("%d%%", weather.getCurrent().getCloud()));
-
-
     }
+
+
 }
